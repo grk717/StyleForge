@@ -24,3 +24,29 @@ In fututre we plan to implement parsing online stores and showing users links to
 
 ## Architecture draft
 ![xd](resources/StyleForge.drawio.png)
+
+
+## API limits
+
+* Input image file size 5 MB maximum
+* The minimum image dimensions is 80 pixels for both height and width
+* The maximum image dimensions is 1024 pixels for both height and width
+* JSON request object size 10 MB (in case of generation)
+* Images per request 1
+* Service supports the PNG and JPEG image formats
+* Response limit - 10 images
+
+Time of responce
+* Responses from the API can take anywhere from <10 second to 30 seconds
+
+
+## Metrics
+* Recall@k
+* Precision@k
+* F1@k
+
+## Project scalability
+* We provide load balancer between frontend and backend layers
+* Our search and generation services are packed in docker containers
+* We provide Kubernetes cluster which manages the search and generation containers
+* Embedding space storage is hosted as PostgreSQL, so we can use some built-in solution for load balancing and parallel query execution.
