@@ -50,3 +50,7 @@ Time of responce
 * Our search and generation services are packed in docker containers
 * We provide Kubernetes cluster which manages the search and generation containers
 * Embedding space storage is hosted as PostgreSQL, so we can use some built-in solution for load balancing and parallel query execution.
+
+## Labeling
+
+[Labeling task](resources/labeling_task_styleforge.pdf)
