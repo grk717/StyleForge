@@ -7,7 +7,9 @@ from torchvision import transforms
 def detection(input_image: Image, model):
 	results = model(input_image)
 	crops = results.crop(save=False)
-	return crops
+	#return [crop.cpu().item() for crop in crops[0]['box']]
+	#print(crops)
+	return [i['im'] for i in crops]
 
 
 def embedding_creation(crops: List, model):
