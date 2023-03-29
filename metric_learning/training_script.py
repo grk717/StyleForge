@@ -54,7 +54,7 @@ def train(model, loss_func, device, train_loader, optimizer, loss_optimizer, epo
 
 ### get all embeddings from dataset ###
 def get_all_embeddings(dataset, model):
-    tester = testers.BaseTester(dataloader_num_workers=0, batch_size=batch_size)
+    tester = testers.BaseTester(dataloader_num_workers=8, batch_size=batch_size)
     return tester.get_all_embeddings(dataset, model)
 
 
@@ -149,14 +149,15 @@ def main(opt):
     iterations_in_epoch = math.ceil(len(train_dataset) / batch_size)
 
     train_loader = torch.utils.data.DataLoader(
-        train_dataset, batch_size=batch_size, shuffle=True
+        train_dataset, batch_size=batch_size, shuffle=True, num_workers=8
     )
     # Model
     model = get_model(opt.model).to(device)
+    #model = torch.load("/mnt/tank/scratch/pgrinkevich/models/c37a6274ca8c4cd9b3bdf66136a408f0/model_ckpt_epoch_40.pth").to(device)
     optimizer = optim.Adam(model.parameters(), lr=base_lr)
     loss_func = losses.SubCenterArcFaceLoss(num_classes=num_classes_train, embedding_size=512).to(device)
     loss_optimizer = torch.optim.Adam(loss_func.parameters(), lr=1e-4)
-    accuracy_calculator = AccuracyCalculator(include=("precision_at_1","mean_average_precision",), k="max_bin_count", device=torch.device("cpu"))
+    accuracy_calculator = AccuracyCalculator(include=("precision_at_1","mean_average_precision",), k="max_bin_count", device=device)
     # Start training
     for epoch in range(0, num_epochs):
         train(model, loss_func, device, train_loader, optimizer, loss_optimizer, epoch, iterations_in_epoch, logger)
