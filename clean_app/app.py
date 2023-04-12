@@ -17,9 +17,7 @@ from config import AppConfig
 config = AppConfig()
 
 detection_model = YoloClothesDetector(config.DETECTOR_MODEL_PATH, 0.5)
-#search_model = ResnetSearcher(config.EMBEDDER_MODEL_PATH, config.EMBEDDING_DATABASE_PATH,\
-#                              config.DATABASE_PATH, top_k=5)
-search_model = ViTSearcher(config.EMBEDDER_MODEL_PATH, config.EMBEDDING_DATABASE_PATH,\
+search_model = ResnetSearcher(config.EMBEDDER_MODEL_PATH, config.EMBEDDING_DATABASE_PATH,\
                               config.DATABASE_PATH, top_k=5)
 
 recognition_service = RecognitionService(detection_model, search_model)
