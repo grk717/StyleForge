@@ -1,4 +1,4 @@
-FROM pytorch/pytorch:1.9.1-cuda11.1-cudnn8-runtime
+FROM pytorch/pytorch:1.13.1-cuda11.6-cudnn8-runtime
 
 # install utilities
 RUN apt-get update && \
@@ -17,4 +17,4 @@ WORKDIR /app/
 ENV PYTHONPATH=/app
 EXPOSE 80
 #ENTRYPOINT ["python3", "-m", "gunicorn", "main:app"]
-ENTRYPOINT ["uvicorn", "main:app", "--host=0.0.0.0", "--port=80"]
+ENTRYPOINT ["uvicorn", "app:app", "--host=0.0.0.0", "--port=80"]
