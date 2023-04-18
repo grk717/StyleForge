@@ -52,5 +52,21 @@ Time of responce
 * Embedding space storage is hosted as PostgreSQL, so we can use some built-in solution for load balancing and parallel query execution.
 
 ## Labeling
-
 [Labeling task](resources/labeling_task_styleforge.pdf)
+
+## Demo
+You can try running our API in docker. NVIDIA GPU environment with CUDA is required.
+### Step 1
+[Download](https://drive.google.com/drive/folders/108w6526DIhWNO5WDkgMcGwFPvjGFdf7N?usp=sharing) models, embeddings database and dataframe with metainfo.
+### Step 2
+In ```/clean_app/config.py``` put pathes to model, embedding and metainfo dataframe.
+### Step 3
+Build and run docker container.
+```commandline
+cd <path_to_cloned_repo>/clear_app
+docker build -t styleforge . 
+docker run --name styleforge_test --gpus all --publish 80:80 styleforge
+```
+
+> **Note:**
+> Tested on Windows environment only.

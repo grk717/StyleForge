@@ -1,0 +1,13 @@
+data/
+yolo_data/
+MNIST/
+CIFAR100_Dataset/
+.idea/
+.vscode/
+*.npy
+*.pth
+*.pt
+*.pkl
+database_images/
+database/database_images/
+database/cropped
