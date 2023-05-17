@@ -1,0 +1,9 @@
+data/
+yolo_data/
+MNIST/
+CIFAR100_Dataset/
+.idea/
+.vscode/
+database/
+database_images/
+data_test/
